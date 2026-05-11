@@ -28,6 +28,10 @@
         <a href="#wholesale">Wholesale</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
+        <button class="cart-button" type="button" data-cart-open>
+          Cart
+          <span class="cart-badge" data-cart-count hidden>0</span>
+        </button>
       </nav>
     </header>
 
@@ -107,7 +111,7 @@
         <div class="section-heading centered">
           <p class="eyebrow">All Products</p>
           <h2 id="products-title">Pick from hand selected favorites.</h2>
-          <p>Filter by category and add items to your inquiry list.</p>
+          <p>Filter by category, add products to your cart, and checkout when your order is ready.</p>
         </div>
         <div class="product-tools" role="tablist" aria-label="Product categories">
           <button class="filter-button is-active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
@@ -161,12 +165,30 @@
       </section>
     </main>
 
-    <aside class="inquiry-tray" aria-live="polite" data-inquiry hidden>
-      <div>
-        <strong data-inquiry-count>0 items selected</strong>
-        <span data-inquiry-items></span>
+    <div class="cart-overlay" data-cart-overlay hidden></div>
+    <aside class="cart-drawer" aria-labelledby="cart-title" aria-live="polite" data-cart-drawer hidden>
+      <div class="cart-drawer-header">
+        <div>
+          <p class="eyebrow">Your Order</p>
+          <h2 id="cart-title">Shopping Cart</h2>
+        </div>
+        <button class="icon-button" type="button" data-cart-close aria-label="Close cart">&times;</button>
       </div>
-      <button class="button button-primary" type="button" data-copy-inquiry>Copy Inquiry</button>
+      <div class="cart-empty" data-cart-empty>
+        <h3>Your cart is empty.</h3>
+        <p>Add Baran products from the catalogue to begin an order.</p>
+        <button class="button button-primary" type="button" data-cart-close>Continue Shopping</button>
+      </div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-summary" data-cart-summary hidden>
+        <div>
+          <span>Subtotal</span>
+          <strong data-cart-subtotal>$0.00</strong>
+        </div>
+        <p>Delivery and tax are calculated on the checkout page. Prices are sample catalogue prices and can be updated.</p>
+        <a class="button button-primary" href="checkout.html">Checkout</a>
+        <button class="button button-plain" type="button" data-cart-close>Keep Shopping</button>
+      </div>
     </aside>
 
     <footer class="site-footer" id="contact">
@@ -187,6 +209,7 @@
       </div>
     </footer>
 
+    <script src="store.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

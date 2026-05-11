@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Checkout | Baran Premium Selections</title>
+    <meta name="description" content="Checkout for Baran Premium Selections product orders.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="checkout-page">
+    <header class="site-header is-scrolled checkout-header" data-header>
+      <a class="brand" href="index.html" aria-label="Baran home">
+        <img src="assets/baran-logo.svg" alt="" class="brand-mark">
+        <span>
+          <strong>BARAN</strong>
+          <small>Premium Selections</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-nav>
+        <a href="index.html#products">Shop</a>
+        <a href="index.html#story">Our Story</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="cart-button" href="index.html#products">
+          Cart
+          <span class="cart-badge" data-cart-count hidden>0</span>
+        </a>
+      </nav>
+    </header>
+
+    <main class="checkout-main">
+      <section class="checkout-title">
+        <p class="eyebrow">Secure order request</p>
+        <h1>Checkout</h1>
+        <p>Review your products, enter contact details, and place an order request. Baran will confirm availability and payment details before fulfillment.</p>
+      </section>
+
+      <section class="checkout-shell" aria-label="Checkout form and order summary">
+        <form class="checkout-form" data-checkout-form>
+          <fieldset>
+            <legend>Contact</legend>
+            <label>
+              Full name
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <div class="field-grid">
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+              <label>
+                Phone
+                <input type="tel" name="phone" autocomplete="tel" required>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Fulfillment</legend>
+            <div class="choice-grid" data-delivery-methods>
+              <label class="choice-card">
+                <input type="radio" name="fulfillment" value="pickup" checked>
+                <span>
+                  <strong>Pickup</strong>
+                  <small>No delivery fee</small>
+                </span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="fulfillment" value="delivery">
+                <span>
+                  <strong>Local delivery</strong>
+                  <small>Free over $100</small>
+                </span>
+              </label>
+            </div>
+            <label data-delivery-address hidden>
+              Delivery address
+              <textarea name="address" rows="3" autocomplete="street-address"></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment</legend>
+            <div class="choice-grid">
+              <label class="choice-card">
+                <input type="radio" name="payment" value="E-transfer" checked>
+                <span>
+                  <strong>E-transfer</strong>
+                  <small>Details confirmed by Baran</small>
+                </span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="payment" value="Pay on pickup">
+                <span>
+                  <strong>Pay on pickup</strong>
+                  <small>Confirm by phone</small>
+                </span>
+              </label>
+            </div>
+            <label>
+              Order notes
+              <textarea name="notes" rows="4" placeholder="Preferred pickup time, gift packaging, substitutions, or event details"></textarea>
+            </label>
+          </fieldset>
+
+          <button class="button button-primary checkout-submit" type="submit">Place Order Request</button>
+          <p class="form-note">This static checkout records the order request in your browser and prepares details to share with Baran. It does not process payment automatically.</p>
+        </form>
+
+        <aside class="order-summary" aria-labelledby="summary-title">
+          <div class="order-summary-header">
+            <p class="eyebrow">Order Summary</p>
+            <h2 id="summary-title">Your Cart</h2>
+          </div>
+          <div class="checkout-empty" data-checkout-empty hidden>
+            <h3>Your cart is empty.</h3>
+            <p>Add products before checking out.</p>
+            <a class="button button-primary" href="index.html#products">Continue Shopping</a>
+          </div>
+          <div class="summary-items" data-summary-items></div>
+          <dl class="totals" data-summary-totals>
+            <div>
+              <dt>Subtotal</dt>
+              <dd data-summary-subtotal>$0.00</dd>
+            </div>
+            <div>
+              <dt>Delivery</dt>
+              <dd data-summary-delivery>$0.00</dd>
+            </div>
+            <div>
+              <dt>Estimated tax</dt>
+              <dd data-summary-tax>$0.00</dd>
+            </div>
+            <div class="total-row">
+              <dt>Total</dt>
+              <dd data-summary-total>$0.00</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="order-confirmation" data-order-confirmation hidden>
+        <p class="eyebrow">Order Created</p>
+        <h2 data-order-title>Thank you.</h2>
+        <p data-order-copy>Your order request is ready.</p>
+        <pre data-order-details></pre>
+        <div class="confirmation-actions">
+          <button class="button button-primary" type="button" data-copy-order>Copy Order Details</button>
+          <a class="button button-secondary" href="tel:+16479067408">Call Baran</a>
+          <a class="button button-plain" href="index.html#products">Continue Shopping</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="store.js"></script>
+    <script src="checkout.js"></script>
+  </body>
+</html>

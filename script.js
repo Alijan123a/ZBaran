@@ -1,121 +1,19 @@
-const products = [
-  {
-    name: 'Rose Pistachio Turkish Delight',
-    category: 'turkish-delight',
-    label: 'Turkish Delight',
-    image: 'assets/catalogue/image-123-816x1472.jpg',
-    description: 'Soft rose-flavored cubes dusted with sugar and finished with pistachio.',
-    tags: ['Rose', 'Pistachio'],
-  },
-  {
-    name: 'Lemon Turkish Delight',
-    category: 'turkish-delight',
-    label: 'Turkish Delight',
-    image: 'assets/catalogue/image-149-1200x1200.jpg',
-    description: 'Bright citrus Turkish delight with a clean, refreshing finish.',
-    tags: ['Lemon', 'Giftable'],
-  },
-  {
-    name: 'Assorted Turkish Delight Rolls',
-    category: 'turkish-delight',
-    label: 'Turkish Delight',
-    image: 'assets/catalogue/image-142-1200x800.jpg',
-    description: 'Colorful rolled sweets with nut coatings and layered fillings.',
-    tags: ['Assorted', 'Nuts'],
-  },
-  {
-    name: 'Classic Pistachio Baklava',
-    category: 'baklava',
-    label: 'Baklava',
-    image: 'assets/catalogue/image-120-736x736.jpg',
-    description: 'Golden pastry layered with pistachio and syrup.',
-    tags: ['Pistachio', 'Classic'],
-  },
-  {
-    name: 'Cream Baklava Squares',
-    category: 'baklava',
-    label: 'Baklava',
-    image: 'assets/catalogue/image-50-720x859.jpg',
-    description: 'Flaky pastry with a smooth cream center and honeyed finish.',
-    tags: ['Cream', 'Honey'],
-  },
-  {
-    name: 'Pistachio Baklava Plate',
-    category: 'baklava',
-    label: 'Baklava',
-    image: 'assets/catalogue/image-177-1200x1200.jpg',
-    description: 'A rich pistachio-forward presentation for dessert trays.',
-    tags: ['Tray', 'Premium'],
-  },
-  {
-    name: 'Rolled Baklava',
-    category: 'baklava',
-    label: 'Baklava',
-    image: 'assets/catalogue/image-180-626x626.jpg',
-    description: 'Rolled pastry with nut filling and a glossy syrup drizzle.',
-    tags: ['Rolled', 'Syrup'],
-  },
-  {
-    name: 'Mediterranean Olive Selection',
-    category: 'olives',
-    label: 'Olives & Oil',
-    image: 'assets/catalogue/image-129-1000x1500.jpg',
-    description: 'A curated mix of Mediterranean olives in classic styles.',
-    tags: ['Classic', 'Briny'],
-  },
-  {
-    name: 'Marinated Olive Blend',
-    category: 'olives',
-    label: 'Olives & Oil',
-    image: 'assets/catalogue/image-161-1200x1800.jpg',
-    description: 'Olives prepared with herbs, spices, citrus, and a bold finish.',
-    tags: ['Marinated', 'Herbs'],
-  },
-  {
-    name: 'Green Olives & Olive Oil',
-    category: 'olives',
-    label: 'Olives & Oil',
-    image: 'assets/catalogue/image-158-499x750.jpg',
-    description: 'Premium green olives paired with the richness of olive oil.',
-    tags: ['Green Olive', 'Oil'],
-  },
-  {
-    name: 'Persian Premium Saffron',
-    category: 'saffron',
-    label: 'Saffron',
-    image: 'assets/catalogue/image-126-780x495.jpg',
-    description: 'Deep red saffron threads for tea, desserts, rice, and fine dishes.',
-    tags: ['Premium', 'Persian'],
-  },
-  {
-    name: 'Roasted Nuts & Dried Fruits',
-    category: 'nuts',
-    label: 'Nuts & Fruits',
-    image: 'assets/catalogue/image-197-736x1308.jpg',
-    description: 'Pistachios, almonds, cashews, walnuts, apricots, figs, and raisins.',
-    tags: ['Roasted', 'Dried Fruit'],
-  },
-  {
-    name: 'Dried Fruit Selection',
-    category: 'nuts',
-    label: 'Nuts & Fruits',
-    image: 'assets/catalogue/image-56-1080x1350.png',
-    description: 'Naturally sweet fruit slices with a colorful serving presentation.',
-    tags: ['Fruit', 'Naturally Sweet'],
-  },
-];
-
+const products = window.BaranStore.products;
 const grid = document.querySelector('[data-product-grid]');
 const filterButtons = document.querySelectorAll('[data-filter]');
 const filterLinks = document.querySelectorAll('[data-filter-link]');
 const header = document.querySelector('[data-header]');
 const nav = document.querySelector('[data-nav]');
 const navToggle = document.querySelector('[data-nav-toggle]');
-const inquiry = document.querySelector('[data-inquiry]');
-const inquiryCount = document.querySelector('[data-inquiry-count]');
-const inquiryItems = document.querySelector('[data-inquiry-items]');
-const copyButton = document.querySelector('[data-copy-inquiry]');
-const selected = new Set();
+const cartDrawer = document.querySelector('[data-cart-drawer]');
+const cartOverlay = document.querySelector('[data-cart-overlay]');
+const cartOpenButtons = document.querySelectorAll('[data-cart-open]');
+const cartCloseButtons = document.querySelectorAll('[data-cart-close]');
+const cartItemsNode = document.querySelector('[data-cart-items]');
+const cartEmptyNode = document.querySelector('[data-cart-empty]');
+const cartSummaryNode = document.querySelector('[data-cart-summary]');
+const cartSubtotalNode = document.querySelector('[data-cart-subtotal]');
+const cartCountNodes = document.querySelectorAll('[data-cart-count]');
 
 function productCard(product) {
   return `
@@ -128,7 +26,11 @@ function productCard(product) {
         </div>
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <button class="button" type="button" data-product="${product.name}">Add to Inquiry</button>
+        <div class="product-purchase">
+          <span>${window.BaranStore.formatMoney(product.price)}</span>
+          <small>${product.unit}</small>
+        </div>
+        <button class="button" type="button" data-add-to-cart="${product.id}">Add to Cart</button>
       </div>
     </article>
   `;
@@ -137,7 +39,6 @@ function productCard(product) {
 function renderProducts(filter = 'all') {
   const visible = filter === 'all' ? products : products.filter((product) => product.category === filter);
   grid.innerHTML = visible.map(productCard).join('');
-  syncSelectedButtons();
 }
 
 function setFilter(filter) {
@@ -149,19 +50,54 @@ function setFilter(filter) {
   renderProducts(filter);
 }
 
-function syncSelectedButtons() {
-  document.querySelectorAll('[data-product]').forEach((button) => {
-    const isSelected = selected.has(button.dataset.product);
-    button.classList.toggle('is-selected', isSelected);
-    button.textContent = isSelected ? 'Added' : 'Add to Inquiry';
-  });
+function cartItemTemplate(item) {
+  return `
+    <article class="cart-line" data-cart-line="${item.id}">
+      <img src="${item.image}" alt="">
+      <div class="cart-line-info">
+        <h3>${item.name}</h3>
+        <p>${item.unit} - ${window.BaranStore.formatMoney(item.price)}</p>
+        <div class="cart-line-actions">
+          <div class="quantity-control" aria-label="Quantity for ${item.name}">
+            <button type="button" data-cart-decrease="${item.id}" aria-label="Decrease ${item.name}">-</button>
+            <input type="number" min="1" max="99" value="${item.quantity}" data-cart-quantity="${item.id}" aria-label="${item.name} quantity">
+            <button type="button" data-cart-increase="${item.id}" aria-label="Increase ${item.name}">+</button>
+          </div>
+          <strong>${window.BaranStore.formatMoney(item.lineTotal)}</strong>
+        </div>
+      </div>
+      <button class="cart-remove" type="button" data-cart-remove="${item.id}">Remove</button>
+    </article>
+  `;
 }
 
-function updateInquiry() {
-  const items = [...selected];
-  inquiry.hidden = items.length === 0;
-  inquiryCount.textContent = `${items.length} item${items.length === 1 ? '' : 's'} selected`;
-  inquiryItems.textContent = items.slice(0, 3).join(', ') + (items.length > 3 ? `, +${items.length - 3} more` : '');
+function renderCart() {
+  const items = window.BaranStore.cartItems();
+  const subtotal = window.BaranStore.cartTotals().subtotal;
+  const count = window.BaranStore.cartCount();
+
+  cartCountNodes.forEach((node) => {
+    node.textContent = String(count);
+    node.hidden = count === 0 && node.matches('.cart-badge');
+  });
+
+  cartItemsNode.innerHTML = items.map(cartItemTemplate).join('');
+  cartEmptyNode.hidden = items.length !== 0;
+  cartSummaryNode.hidden = items.length === 0;
+  cartSubtotalNode.textContent = window.BaranStore.formatMoney(subtotal);
+}
+
+function openCart() {
+  renderCart();
+  cartDrawer.hidden = false;
+  cartOverlay.hidden = false;
+  document.body.classList.add('cart-open');
+}
+
+function closeCart() {
+  cartDrawer.hidden = true;
+  cartOverlay.hidden = true;
+  document.body.classList.remove('cart-open');
 }
 
 filterButtons.forEach((button) => {
@@ -176,26 +112,47 @@ filterLinks.forEach((link) => {
 });
 
 grid.addEventListener('click', (event) => {
-  const button = event.target.closest('[data-product]');
+  const button = event.target.closest('[data-add-to-cart]');
   if (!button) return;
-  const name = button.dataset.product;
-  if (selected.has(name)) selected.delete(name);
-  else selected.add(name);
-  syncSelectedButtons();
-  updateInquiry();
+  window.BaranStore.addToCart(button.dataset.addToCart, 1);
+  button.textContent = 'Added';
+  window.setTimeout(() => {
+    button.textContent = 'Add to Cart';
+  }, 900);
+  openCart();
 });
 
-copyButton.addEventListener('click', async () => {
-  const text = `Baran inquiry: ${[...selected].join(', ')}`;
-  try {
-    await navigator.clipboard.writeText(text);
-    copyButton.textContent = 'Copied';
-    window.setTimeout(() => {
-      copyButton.textContent = 'Copy Inquiry';
-    }, 1400);
-  } catch {
-    window.location.href = `tel:+16479067408`;
+cartItemsNode.addEventListener('click', (event) => {
+  const increase = event.target.closest('[data-cart-increase]');
+  const decrease = event.target.closest('[data-cart-decrease]');
+  const remove = event.target.closest('[data-cart-remove]');
+
+  if (increase) window.BaranStore.addToCart(increase.dataset.cartIncrease, 1);
+  if (decrease) {
+    const item = window.BaranStore.cartItems().find((cartItem) => cartItem.id === decrease.dataset.cartDecrease);
+    if (item) window.BaranStore.setQuantity(item.id, item.quantity - 1);
   }
+  if (remove) window.BaranStore.removeFromCart(remove.dataset.cartRemove);
+});
+
+cartItemsNode.addEventListener('change', (event) => {
+  const input = event.target.closest('[data-cart-quantity]');
+  if (!input) return;
+  window.BaranStore.setQuantity(input.dataset.cartQuantity, input.value);
+});
+
+cartOpenButtons.forEach((button) => {
+  button.addEventListener('click', openCart);
+});
+
+cartCloseButtons.forEach((button) => {
+  button.addEventListener('click', closeCart);
+});
+
+cartOverlay.addEventListener('click', closeCart);
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !cartDrawer.hidden) closeCart();
 });
 
 navToggle.addEventListener('click', () => {
@@ -204,7 +161,8 @@ navToggle.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
 
-nav.addEventListener('click', () => {
+nav.addEventListener('click', (event) => {
+  if (event.target.closest('[data-cart-open]')) return;
   nav.classList.remove('is-open');
   document.body.classList.remove('menu-open');
   navToggle.setAttribute('aria-expanded', 'false');
@@ -214,5 +172,7 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('is-scrolled', window.scrollY > 24);
 });
 
+window.addEventListener('baran:cart-change', renderCart);
+
 renderProducts();
-updateInquiry();
+renderCart();

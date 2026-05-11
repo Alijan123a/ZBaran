@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baran Premium Selections</title>
+    <meta name="description" content="Baran Premium Selections brings Mediterranean olives, baklava, Turkish delight, saffron, nuts, and dried fruits to Canada.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#home" aria-label="Baran home">
+        <img src="assets/baran-logo.svg" alt="" class="brand-mark">
+        <span>
+          <strong>BARAN</strong>
+          <small>Premium Selections</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-nav>
+        <a href="#products">Products</a>
+        <a href="#story">Our Story</a>
+        <a href="#wholesale">Wholesale</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-bg" src="assets/catalogue/image-21-1536x910.jpg" alt="Baran gourmet collection of Turkish delight, olives, olive oil, and baklava">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Mediterranean gourmet collection</p>
+          <h1 id="hero-title">BARAN</h1>
+          <p class="hero-copy">Premium olives, baklava, Turkish delight, saffron, nuts, and dried fruits selected for memorable tables and thoughtful gifts.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#products">Explore Products</a>
+            <a class="button button-secondary" href="tel:+16479067408">Call +1 647 906 7408</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="collection-strip" aria-label="Product highlights">
+        <a href="#products" data-filter-link="turkish-delight">
+          <span>Turkish Delight</span>
+          <strong>Rose, lemon, and nut-filled pieces</strong>
+        </a>
+        <a href="#products" data-filter-link="baklava">
+          <span>Baklava</span>
+          <strong>Pistachio, cream, and rolled classics</strong>
+        </a>
+        <a href="#products" data-filter-link="olives">
+          <span>Olives & Oil</span>
+          <strong>Fresh Mediterranean blends</strong>
+        </a>
+        <a href="#products" data-filter-link="nuts">
+          <span>Nuts & Dried Fruits</span>
+          <strong>Roasted, seasoned, and naturally sweet</strong>
+        </a>
+      </section>
+
+      <section class="intro section-pad" id="story">
+        <div class="section-heading">
+          <p class="eyebrow">Welcome to Baran</p>
+          <h2>Authentic taste, premium presentation.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>Baran Gourmet Collection brings the authentic taste of the Mediterranean to Canada with premium olives, baklava, Turkish delight, saffron, and fine chocolate.</p>
+          <p>Every product is chosen for freshness, tradition, and the kind of flavor that makes a table feel generous.</p>
+        </div>
+      </section>
+
+      <section class="feature-grid section-pad" aria-label="Featured categories">
+        <article class="feature feature-large">
+          <img src="assets/catalogue/image-123-816x1472.jpg" alt="Rose pistachio Turkish delight cubes">
+          <div>
+            <p class="eyebrow">Sweet & fragrant</p>
+            <h2>Turkish Delight</h2>
+            <p>Soft, jewel-toned bites with pistachio, citrus, and rose notes.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <img src="assets/catalogue/image-177-1200x1200.jpg" alt="Pistachio baklava on a plate">
+          <div>
+            <p class="eyebrow">Layered classics</p>
+            <h2>Baklava</h2>
+            <p>Golden pastry, pistachio, and rich syrup in traditional styles.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <img src="assets/catalogue/image-129-1000x1500.jpg" alt="Assorted Mediterranean olives in small bowls">
+          <div>
+            <p class="eyebrow">Bold & briny</p>
+            <h2>Olives</h2>
+            <p>Classic and marinated blends with herbs, spices, and citrus.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="products section-pad" id="products" aria-labelledby="products-title">
+        <div class="section-heading centered">
+          <p class="eyebrow">All Products</p>
+          <h2 id="products-title">Pick from hand selected favorites.</h2>
+          <p>Filter by category and add items to your inquiry list.</p>
+        </div>
+        <div class="product-tools" role="tablist" aria-label="Product categories">
+          <button class="filter-button is-active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-button" type="button" data-filter="turkish-delight" role="tab" aria-selected="false">Turkish Delight</button>
+          <button class="filter-button" type="button" data-filter="baklava" role="tab" aria-selected="false">Baklava</button>
+          <button class="filter-button" type="button" data-filter="olives" role="tab" aria-selected="false">Olives & Oil</button>
+          <button class="filter-button" type="button" data-filter="saffron" role="tab" aria-selected="false">Saffron</button>
+          <button class="filter-button" type="button" data-filter="nuts" role="tab" aria-selected="false">Nuts & Fruits</button>
+        </div>
+        <div class="product-grid" data-product-grid></div>
+      </section>
+
+      <section class="wholesale section-pad" id="wholesale">
+        <img src="assets/catalogue/image-56-1080x1350.png" alt="Dried fruit selection on a white plate">
+        <div>
+          <p class="eyebrow">Retail, events, and wholesale</p>
+          <h2>Build a table people remember.</h2>
+          <p>From gift boxes to event trays and store selections, Baran offers Mediterranean staples with a polished premium look.</p>
+          <div class="stats" aria-label="Baran strengths">
+            <span><strong>6</strong> Catalogue categories</span>
+            <span><strong>Fresh</strong> Roasted nuts</span>
+            <span><strong>Premium</strong> Saffron</span>
+          </div>
+          <a class="button button-primary" href="#contact">Start an Inquiry</a>
+        </div>
+      </section>
+
+      <section class="faq section-pad" id="faq" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Good details before ordering.</h2>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>What products does Baran offer?</summary>
+            <p>Baran offers Mediterranean olives, baklava, Turkish delight, saffron, roasted nuts, and dried fruits.</p>
+          </details>
+          <details>
+            <summary>Can I request products for events or stores?</summary>
+            <p>Yes. Use the inquiry list or call directly to discuss retail, event, and wholesale selections.</p>
+          </details>
+          <details>
+            <summary>Are there multiple olive flavors?</summary>
+            <p>The catalogue highlights classic olives and marinated blends with herbs, spices, and citrus.</p>
+          </details>
+          <details>
+            <summary>Where is Baran based?</summary>
+            <p>Baran serves customers in Canada and can be reached through the catalogue phone number.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <aside class="inquiry-tray" aria-live="polite" data-inquiry hidden>
+      <div>
+        <strong data-inquiry-count>0 items selected</strong>
+        <span data-inquiry-items></span>
+      </div>
+      <button class="button button-primary" type="button" data-copy-inquiry>Copy Inquiry</button>
+    </aside>
+
+    <footer class="site-footer" id="contact">
+      <div>
+        <img src="assets/baran-logo.svg" alt="Baran Premium Selections" class="footer-logo">
+        <p>Premium Mediterranean selections for everyday tables, gifting, retail, and events.</p>
+      </div>
+      <address>
+        <strong>Contact</strong>
+        <a href="tel:+16479067408">+1 647 906 7408</a>
+        <a href="https://www.zbaran.ca/">www.zbaran.ca</a>
+      </address>
+      <div>
+        <strong>Collection</strong>
+        <a href="#products" data-filter-link="baklava">Baklava</a>
+        <a href="#products" data-filter-link="turkish-delight">Turkish Delight</a>
+        <a href="#products" data-filter-link="olives">Olives & Oil</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
